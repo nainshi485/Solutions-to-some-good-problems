@@ -1,0 +1,81 @@
+Aggressive Cows Problem
+Send Feedback
+Farmer John has built a new long barn, with N (2 <= N <= 100,000) stalls. The stalls are located along a straight line at positions x1,...,xN (0 <= xi <= 1,000,000,000).
+His C (2 <= C <= N) cows don't like this barn layout and become aggressive towards each other once put into a stall. To prevent the cows from hurting each other, FJ wants to assign the cows to the stalls, such that the minimum distance between any two of them is as large as possible. What is the largest minimum distance?
+Input
+
+t – the number of test cases, then t test cases follows. 
+* Line 1: Two space-separated integers: N and C
+* Lines 2..N+1: Line i+1 contains an integer stall location, xi
+
+Output
+
+For each test case output one integer: the largest minimum distance.
+
+Sample Input :
+
+1
+5 3
+1
+2
+8
+4
+9
+
+Sample Output:
+
+3 
+/////This problem I have found in my course of Competative programming from Coding Ninjas under the guidance of Parikh Sir and Ankush Sir
+
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+
+	// Write your code here
+    int t;
+    cin>>t;
+    while(t--)
+    {
+       long long  int n;
+        cin>>n; ///number of stalls
+      long long   int c;
+        cin>>c; /// nuber of cows
+         long long int *arr=new long long int[n];
+        for(int i=0;i<n;i++)
+        {
+            cin>>arr[i];
+        }
+        sort(arr,arr+n);
+        long long int s=0;
+       long long  int e=arr[n-1]-arr[0];
+        int ans=0;
+        while(s<=e)
+        {
+          long long  int temp=1;//because we have to place a cow at 1 always 
+            int fi=arr[0]; //on which a cow is already placed
+            long long mid=(s+e)/2;
+            for(int i=1;i<n;i++)
+            {
+                if(arr[i]-fi>=mid)
+                {
+                    temp++;
+                    fi=arr[i];//if the cow get placed here then to find the difference update it
+                }
+            }
+                
+            if(temp<c)
+                {
+                     e=mid-1;//if the temp!-cow it means mid is not the largest yet find in rest of the numbers
+                    
+                }
+                else
+                {
+                   s=mid+1;//it means mid is the largest now find in the second half
+                    ans=mid;
+                }
+            }
+            cout<<ans<<endl;
+        
+        
+    }
+}
